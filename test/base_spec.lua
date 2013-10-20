@@ -37,12 +37,12 @@ describe( "base library", function()
 
    describe( "should handle base32(crockford) strings", function()
       it( "should convert data to a base32 string", function()
-         -- https://github.com/agnoster/base32-js
-         assert.is.same( "91jprv3f41bpywkccg", string.lower( basexx.to_crockford( "Hello World" ) ) )
+         -- https://github.com/ingydotnet/crockford-py/blob/master/tests/test_functions.py
+         assert.is.same( "CSQPY", basexx.to_crockford( "foo" ) )
       end)
       it( "should read data from a base32 string", function()
-         -- https://github.com/agnoster/base32-js
-         assert.is.same( "Wow, it really works!", basexx.from_crockford( "axqqeb10d5u20wk5c5p6ry90exqq4uvk44" ) )
+         -- https://github.com/ingydotnet/crockford-py/blob/master/tests/test_functions.py
+         assert.is.same( "foo", basexx.from_crockford( "CSQPY" ) )
       end)
    end)
 

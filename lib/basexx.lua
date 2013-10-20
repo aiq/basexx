@@ -43,11 +43,11 @@ local basexx = {}
 -- base2(bitfield) decode and encode function
 ------------------------------------------------------------------------------------------------------------------------
 
+local bitMap = { o = "0", i = "1", l = "1" }
+
 function basexx.from_bit( str )
    str = string.lower( str )
-   str = str:gsub( 'o', '0' )
-   str = str:gsub( 'l', '1' )
-   str = str:gsub( 'i', '1' )
+   str = str:gsub( '[ilo]', function( c ) return bitMap[ c ] end )
    return ( str:gsub( '........', function ( cc )
                return string.char( tonumber( cc, 2 ) )
             end ) )
@@ -135,14 +135,12 @@ end
 -- crockford: http://www.crockford.com/wrmg/base32.html
 ------------------------------------------------------------------------------------------------------------------------
 
-local crockfordAlphabet = "0123456789ABCDEFGHJKMNPQRTUVWXYZ"
+local crockfordAlphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+local crockfordMap = { O = "0", I = "1", L = "1", U = "V" }
 
 function basexx.from_crockford( str )
    str = string.upper( str )
-   str = string.gsub( str, "I", "1" )
-   str = string.gsub( str, "L", "1" )
-   str = string.gsub( str, "O", "0" )
-   str = string.gsub( str, "S", "5”" )
+   str = str:gsub( '[ILOU]', function( c ) return crockfordMap[ c ] end )
    return from_basexx( str, crockfordAlphabet, 5 )
 end
 
