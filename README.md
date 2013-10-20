@@ -1,6 +1,6 @@
 #basexx
 
-A library which provides base2(bitfield), base32(crock ford/rfc 3548), base64 decoding and encoding.
+A Lua library which provides base2(bitfield), base16(hex), base32(crockford/rfc), base64 decoding and encoding.
 
 ##from_bit / to_bit
 
