@@ -18,7 +18,7 @@ Converts a byte string to a bitfield string.
 
 ##from_hex / to_hex
 
-Converts a byte string to a uppercase hex data string.
+Converts a byte string to a uppercase [hex](http://tools.ietf.org/html/rfc3548#section-6) data string.
 
 	basexx.to_hex( "Hello world!" ) --> 48656C6C6F20776F726C6421
 	basexx.from_hex( "48656C6C6F20776F726C6421" ) --> Hello world!
@@ -26,7 +26,7 @@ Converts a byte string to a uppercase hex data string.
 
 ##from_base32 / to_base32
 
-Converts a byte string to a base32(_rfc3548_) uppercase data string.
+Converts a byte string to a [base32(_rfc3548_)](http://tools.ietf.org/html/rfc3548#section-5) uppercase data string.
 
 * It's case insensitive
 
@@ -37,7 +37,7 @@ Converts a byte string to a base32(_rfc3548_) uppercase data string.
 
 ##from_crockford / to_crockford
 
-Converts a byte string to a base32(_crockford_) uppercase data string. The optional check value is not implemented.
+Converts a byte string to a [base32(_crockford_)](http://www.crockford.com/wrmg/base32.html) uppercase data string. The optional check value is not implemented. 
 
 * It's case insensitive
 * 1, I, i, L and l maps to the same value
@@ -51,7 +51,7 @@ Converts a byte string to a base32(_crockford_) uppercase data string. The optio
 
 ##from_base64 / to_base64
 
-Converts a byte string to a base64 data string.
+Converts a byte string to a [base64](http://tools.ietf.org/html/rfc3548#section-3) data string.
 
 	basexx.to_base64( "Man") --> TWFu
 	basexx.from_base64( "TWFu" ) --> Man
