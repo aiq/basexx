@@ -2,7 +2,7 @@
 -- util functions
 ------------------------------------------------------------------------------------------------------------------------
 
-function divide_string( str, max, fillChar )
+local function divide_string( str, max, fillChar )
    fillChar = fillChar or ""
    local result = {}
 
@@ -19,7 +19,7 @@ function divide_string( str, max, fillChar )
    return result
 end
 
-function number_to_bit( num, length )
+local function number_to_bit( num, length )
    local bits = {}
 
    while num > 0 do
