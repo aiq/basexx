@@ -1,6 +1,6 @@
 return {
    default = {
-      ROOT = "test",
+      ROOT = { "test" },
       verbose = true,
       lpath = "lib/?.lua"
    }
