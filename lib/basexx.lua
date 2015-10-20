@@ -163,5 +163,21 @@ function basexx.to_base64( str )
 end
 
 ------------------------------------------------------------------------------------------------------------------------
+--
+------------------------------------------------------------------------------------------------------------------------
+-- URL safe base64 decode and encode function
+------------------------------------------------------------------------------------------------------------------------
+
+local base64urlAlphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+ 
+function basexx.from_base64url( str )
+   return from_basexx( str, base64urlAlphabet, 6 )
+end
+
+function basexx.to_base64url( str )
+   return to_basexx( str, base64urlAlphabet, 6, '')
+end
+
+------------------------------------------------------------------------------------------------------------------------
 
 return basexx
