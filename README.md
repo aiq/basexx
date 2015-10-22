@@ -55,3 +55,7 @@ Converts a byte string to a [base64](http://tools.ietf.org/html/rfc3548#section-
 
 	basexx.to_base64( "Man") --> TWFu
 	basexx.from_base64( "TWFu" ) --> Man
+
+##from_base64url/ to_base64url
+
+Same as above, but uses a [URL Safe base64](https://tools.ietf.org/html/rfc4648#section-5) alphabet and no padding.
