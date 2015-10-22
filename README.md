@@ -51,11 +51,11 @@ Converts a byte string to a [base32(_crockford_)](http://www.crockford.com/wrmg/
 
 ##from_base64 / to_base64
 
-Converts a byte string to a [base64](http://tools.ietf.org/html/rfc3548#section-3) data string.
+Converts a byte string to a [base64](https://tools.ietf.org/html/rfc4648#section-4) data string.
 
 	basexx.to_base64( "Man") --> TWFu
 	basexx.from_base64( "TWFu" ) --> Man
 
-##from_base64url/ to_base64url
+##from_url64/ to_url64
 
 Same as above, but uses a [URL Safe base64](https://tools.ietf.org/html/rfc4648#section-5) alphabet and no padding.

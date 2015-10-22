@@ -16,26 +16,26 @@ B0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleG
 
    it( "should convert data to a base64 string", function()
       -- http://en.wikipedia.org/wiki/Base64#URL_applications
-      assert.is.same( 'TWFu', basexx.to_base64url( 'Man') )
-      assert.is.same( 'bGVhc3VyZS4', basexx.to_base64url( 'leasure.') )
-      assert.is.same( 'cGxlYXN1cmUu', basexx.to_base64url( 'pleasure.') )
-      assert.is.same( 'ZWFzdXJlLg', basexx.to_base64url( 'easure.') )
-      assert.is.same( 'c3VyZS4', basexx.to_base64url( 'sure.') )
+      assert.is.same( 'TWFu', basexx.to_url64( 'Man') )
+      assert.is.same( 'bGVhc3VyZS4', basexx.to_url64( 'leasure.') )
+      assert.is.same( 'cGxlYXN1cmUu', basexx.to_url64( 'pleasure.') )
+      assert.is.same( 'ZWFzdXJlLg', basexx.to_url64( 'easure.') )
+      assert.is.same( 'c3VyZS4', basexx.to_url64( 'sure.') )
 
-      assert.is.same( string.gsub( long64, "\n", "" ), basexx.to_base64url( string.gsub( longtxt, "\n", "" ) ) )
-      assert.is.same( long64URL, basexx.to_base64url( longtxtURL ) )
+      assert.is.same( string.gsub( long64, "\n", "" ), basexx.to_url64( string.gsub( longtxt, "\n", "" ) ) )
+      assert.is.same( long64URL, basexx.to_url64( longtxtURL ) )
    end)
 
    it( "should read data from a base64 string", function()
       -- http://en.wikipedia.org/wiki/Base64#URL_applications
-      assert.is.same( 'Man', basexx.from_base64url( 'TWFu') )
-      assert.is.same( 'leasure.', basexx.from_base64url( 'bGVhc3VyZS4') )
-      assert.is.same( 'pleasure.', basexx.from_base64url( 'cGxlYXN1cmUu') )
-      assert.is.same( 'easure.', basexx.from_base64url( 'ZWFzdXJlLg') )
-      assert.is.same( 'sure.', basexx.from_base64url( 'c3VyZS4') )
+      assert.is.same( 'Man', basexx.from_url64( 'TWFu') )
+      assert.is.same( 'leasure.', basexx.from_url64( 'bGVhc3VyZS4') )
+      assert.is.same( 'pleasure.', basexx.from_url64( 'cGxlYXN1cmUu') )
+      assert.is.same( 'easure.', basexx.from_url64( 'ZWFzdXJlLg') )
+      assert.is.same( 'sure.', basexx.from_url64( 'c3VyZS4') )
 
-      assert.is.same( string.gsub( longtxt, "\n", "" ), basexx.from_base64url( string.gsub( long64, "\n", "" ) ) )
-      assert.is.same( longtxtURL, basexx.from_base64url( long64URL ) )
+      assert.is.same( string.gsub( longtxt, "\n", "" ), basexx.from_url64( string.gsub( long64, "\n", "" ) ) )
+      assert.is.same( longtxtURL, basexx.from_url64( long64URL ) )
    end)
 
 end)

@@ -168,14 +168,14 @@ end
 -- URL safe base64 decode and encode function
 ------------------------------------------------------------------------------------------------------------------------
 
-local base64urlAlphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+local url64Alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
  
-function basexx.from_base64url( str )
-   return from_basexx( str, base64urlAlphabet, 6 )
+function basexx.from_url64( str )
+   return from_basexx( str, url64Alphabet, 6 )
 end
 
-function basexx.to_base64url( str )
-   return to_basexx( str, base64urlAlphabet, 6, '')
+function basexx.to_url64( str )
+   return to_basexx( str, url64Alphabet, 6, '')
 end
 
 ------------------------------------------------------------------------------------------------------------------------
