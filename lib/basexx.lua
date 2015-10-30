@@ -136,7 +136,7 @@ end
 ------------------------------------------------------------------------------------------------------------------------
 
 local crockfordAlphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
-local crockfordMap = { O = "0", I = "1", L = "1", U = "V" }
+local crockfordMap = { O = "0", I = "1", L = "1" }
 
 function basexx.from_crockford( str )
    str = string.upper( str )
