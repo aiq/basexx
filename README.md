@@ -56,6 +56,15 @@ Converts a byte string to a [base64](https://tools.ietf.org/html/rfc4648#section
 	basexx.to_base64( "Man") --> TWFu
 	basexx.from_base64( "TWFu" ) --> Man
 
-##from_url64/ to_url64
+##from_url64 / to_url64
 
 Same as above, but uses a [URL Safe base64](https://tools.ietf.org/html/rfc4648#section-5) alphabet and no padding.
+
+##from_z85 / to_z85
+
+Converts a byte string to a [Base85(ZeroMQ)](http://rfc.zeromq.org/spec:32) data string.
+to_z85 expects only a binary string that length is divisible by 4 with no remainder, and from_z85 expects only printable a string that length is divisible by 5 with no remainder.
+
+   basexx.to_z85( "1234" ) --> f!$Kw
+   basexx.from_z85( "f!$Kw" ) --> 1234
+   
