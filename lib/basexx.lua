@@ -23,7 +23,7 @@ local function number_to_bit( num, length )
    local bits = {}
 
    while num > 0 do
-      local rest = math.fmod( num, 2 )
+      local rest = math.floor( math.fmod( num, 2 ) )
       table.insert( bits, rest )
       num = ( num - rest ) / 2
    end
