@@ -16,7 +16,7 @@ branches:
 
 before_install:
    - pip install hererocks
-   - hererocks base -r^^--$LUA
+   - hererocks base -r^ --$LUA
    - export PATH=$PATH:$PWD/base/bin
    - luarocks install busted
 
