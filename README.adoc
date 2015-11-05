@@ -1,5 +1,7 @@
 = basexx
 
+image::https://api.travis-ci.org/aiq/basexx.png[travis]
+
 A Lua library which provides base2(bitfield), base16(hex), base32(crockford/rfc), base64 decoding and encoding.
 
 == from_bit / to_bit
