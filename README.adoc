@@ -55,7 +55,7 @@ Converts a byte string to a http://www.crockford.com/wrmg/base32.html[base32(_cr
 [source,lua]
 ----
 string.lower( basexx.to_crockford( "Hello World" ) ) --> 91jprv3f41bpywkccg
-basexx.from_crockford( "axqqeb10d5u20wk5c5p6ry90exqq4uvk44" ) --> Wow, it really works!
+basexx.from_crockford( "axqqeb10d5t20wk5c5p6ry90exqq4tvk44" ) --> Wow, it really works!
 ----
 
 === from_base64 / to_base64
