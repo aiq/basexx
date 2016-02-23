@@ -6,6 +6,17 @@ A Lua library for base2, base16, base32, base64, base85 decoding and encoding of
 
 == API
 
+For every supported format has basexx a *_from_* and *_to_* function.
+
+The *_from_* functions have two parameters:
+
+* *str* which represent the encoded string that should be decoded
+* *ignore* is an optional set of characters that should be ignored in the string, see the *_from_bit_* and *_from_hex_* examples
+
+The *_to_* functions have just one parameter:
+
+* *str* the data string that should be encoded
+
 === from_bit / to_bit
 
 Converts a byte string to a bitfield string.
@@ -18,7 +29,7 @@ Converts a byte string to a bitfield string.
 basexx.to_bit( "ACDC" ) --> 01000001010000110100010001000011
 basexx.from_bit( "01000001010000110100010001000011" ) --> ACDC
 basexx.from_bit( "o1ooooo1o1oooo11" ) --> AC
-basexx.from_bit( "OioooooiOiooooii" ) --> AC
+basexx.from_bit( "Oioooooi Oiooooii\n", " \n" ) --> AC
 ----
 
 === from_hex / to_hex
@@ -28,7 +39,7 @@ Converts a byte string to a uppercase http://tools.ietf.org/html/rfc3548#section
 [source,lua]
 ----
 basexx.to_hex( "Hello world!" ) --> 48656C6C6F20776F726C6421
-basexx.from_hex( "48656C6C6F20776F726C6421" ) --> Hello world!
+basexx.from_hex( "4865-6C6C 6F20-776F 726C-6421", "- " ) --> Hello world!
 basexx.from_hex( "48656c6c6f20776f726c6421" ) --> Hello world!
 ----
 

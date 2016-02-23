@@ -35,6 +35,13 @@ local function number_to_bit( num, length )
    return string.reverse( table.concat( bits ) )
 end
 
+local function ignore_set( str, set )
+   if set then
+      str = str:gsub( "["..set.."]", "" )
+   end
+   return str
+end
+
 --------------------------------------------------------------------------------
 
 local basexx = {}
@@ -45,7 +52,8 @@ local basexx = {}
 
 local bitMap = { o = "0", i = "1", l = "1" }
 
-function basexx.from_bit( str )
+function basexx.from_bit( str, ignore )
+   str = ignore_set( str, ignore )
    str = string.lower( str )
    str = str:gsub( '[ilo]', function( c ) return bitMap[ c ] end )
    return ( str:gsub( '........', function ( cc )
@@ -69,7 +77,8 @@ end
 -- base16(hex) decode and encode function
 --------------------------------------------------------------------------------
 
-function basexx.from_hex( str )
+function basexx.from_hex( str, ignore )
+   str = ignore_set( str, ignore )
    return ( str:gsub( '..', function ( cc )
                return string.char( tonumber( cc, 16 ) )
             end ) )
@@ -124,7 +133,8 @@ end
 local base32Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
 local base32PadMap = { "", "======", "====", "===", "=" }
 
-function basexx.from_base32( str )
+function basexx.from_base32( str, ignore )
+   str = ignore_set( str, ignore )
    return from_basexx( string.upper( str ), base32Alphabet, 5 )
 end
 
@@ -139,7 +149,8 @@ end
 local crockfordAlphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 local crockfordMap = { O = "0", I = "1", L = "1" }
 
-function basexx.from_crockford( str )
+function basexx.from_crockford( str, ignore )
+   str = ignore_set( str, ignore )
    str = string.upper( str )
    str = str:gsub( '[ILOU]', function( c ) return crockfordMap[ c ] end )
    return from_basexx( str, crockfordAlphabet, 5 )
@@ -158,7 +169,8 @@ local base64Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"..
                        "0123456789+/"
 local base64PadMap = { "", "==", "=" }
  
-function basexx.from_base64( str )
+function basexx.from_base64( str, ignore )
+   str = ignore_set( str, ignore )
    return from_basexx( str, base64Alphabet, 6 )
 end
 
@@ -174,7 +186,8 @@ local url64Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"..
                       "abcdefghijklmnopqrstuvwxyz"..
                       "0123456789-_"
  
-function basexx.from_url64( str )
+function basexx.from_url64( str, ignore )
+   str = ignore_set( str, ignore )
    return from_basexx( str, url64Alphabet, 6 )
 end
 
@@ -199,7 +212,8 @@ local z85Decoder = { 0x00, 0x44, 0x00, 0x54, 0x53, 0x52, 0x48, 0x00,
                      0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 
                      0x21, 0x22, 0x23, 0x4F, 0x00, 0x50, 0x00, 0x00 }
 
-function basexx.from_z85( str )
+function basexx.from_z85( str, ignore )
+   str = ignore_set( str, ignore )
    if #str % 5 ~= 0 then return nil end
 
    local result = {}

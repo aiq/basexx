@@ -10,4 +10,9 @@ describe( "should handle base32(rfc3548) strings", function()
                       basexx.from_base32( "MNUHK3TLPEQGEYLDN5XCC===" ) )
    end)
 
+   it( "should allow to ignore characters in a base32 string", function()
+      assert.is.same( "chunky bacon!",
+                      basexx.from_base32( "MNUHK3TLPEQGEYLDN5XCC===" ) )
+   end)
+
 end)

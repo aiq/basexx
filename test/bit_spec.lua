@@ -17,4 +17,8 @@ describe( "should handle bitfields strings", function()
       assert.is.same( "AC", basexx.from_bit( "OioooooiOiooooii" ) )
    end)
 
+   it( "should allow to ignore characters in a bitfield string", function()
+      assert.is.same( "AC", basexx.from_bit( "o1ooooo1 o1oooo11", " " ) )
+   end)
+
 end)

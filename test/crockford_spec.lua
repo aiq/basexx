@@ -15,4 +15,8 @@ describe( "should handle base32(crockford) strings", function()
       assert.is.same( "Wow, it really works!", basexx.from_crockford( "axqqeb10d5t20wk5c5p6ry90exqq4tvk44" ) )
    end)
 
+   it( "should allow to ignore characters in a crockford string", function()
+      assert.is.same( "foo", basexx.from_crockford( "CSQPY\n", "\n" ) )
+   end)
+
 end)

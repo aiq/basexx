@@ -51,4 +51,8 @@ describe( "should handle base64 strings", function()
       assert.is.same( msgtxt, basexx.from_url64( msg64 ) )
    end)
 
+   it( "should allow to ignore characters in a url64 string", function()
+      assert.is.same( "Man", basexx.from_url64( "TW-Fu\n", "-\n" ) )
+   end)
+
 end)

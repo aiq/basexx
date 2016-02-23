@@ -14,4 +14,9 @@ describe( "should handle hex strings", function()
                       basexx.from_hex( "48656c6c6f20776f726c6421" ) )
    end)
 
+   it( "should allow to ignore characters in a hex string", function()
+      assert.is.same( "Hello world!",
+                      basexx.from_hex( "4865-6c6c 6f20-776f 726c-6421", " -" ) )
+   end)
+
 end)
