@@ -19,4 +19,10 @@ describe( "should handle hex strings", function()
                       basexx.from_hex( "4865-6c6c 6f20-776f 726c-6421", " -" ) )
    end)
 
+   it( "should handle wrong characters without a crash", function()
+      local res, err = basexx.from_hex( "4865-6c6c" )
+      assert.is.falsy( res )
+      assert.is.same( "-", err )
+   end)
+
 end)

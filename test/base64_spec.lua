@@ -62,4 +62,10 @@ describe( "should handle base64 strings", function()
       assert.is.same( "Man", basexx.from_base64( "TW-Fu", "-" ) )
    end)
 
+   it( "should handle wrong characters without a crash", function()
+      local res, err = basexx.from_base64( "TW`Fu" )
+      assert.is.falsy( res )
+      assert.is.same( "`", err )
+   end)
+
 end)

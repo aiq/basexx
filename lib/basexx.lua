@@ -42,6 +42,12 @@ local function ignore_set( str, set )
    return str
 end
 
+local function pure_from_bit( str )
+   return ( str:gsub( '........', function ( cc )
+               return string.char( tonumber( cc, 2 ) )
+            end ) )
+end
+
 --------------------------------------------------------------------------------
 
 local basexx = {}
@@ -56,9 +62,10 @@ function basexx.from_bit( str, ignore )
    str = ignore_set( str, ignore )
    str = string.lower( str )
    str = str:gsub( '[ilo]', function( c ) return bitMap[ c ] end )
-   return ( str:gsub( '........', function ( cc )
-               return string.char( tonumber( cc, 2 ) )
-            end ) )
+   local wrong = str:match( "[^01]" )
+   if wrong then return nil, wrong end
+
+   return pure_from_bit( str )
 end
 
 function basexx.to_bit( str )
@@ -79,6 +86,9 @@ end
 
 function basexx.from_hex( str, ignore )
    str = ignore_set( str, ignore )
+   local wrong = str:match( "[^%x]" )
+   if wrong then return nil, wrong end
+
    return ( str:gsub( '..', function ( cc )
                return string.char( tonumber( cc, 16 ) )
             end ) )
@@ -99,14 +109,17 @@ local function from_basexx( str, alphabet, bits )
    for i = 1, #str do
       local c = string.sub( str, i, i )
       if c ~= '=' then
-         local index = string.find( alphabet, c )
+         local index = string.find( alphabet, c, 1, true )
+         if not index or c == "$" then
+            return nil, c
+         end
          table.insert( result, number_to_bit( index - 1, bits ) )
       end
    end
 
    local value = table.concat( result )
    local pad = #value % 8
-   return basexx.from_bit( string.sub( value, 1, #value - pad ) )
+   return pure_from_bit( string.sub( value, 1, #value - pad ) )
 end
 
 local function to_basexx( str, alphabet, bits, pad )
@@ -214,14 +227,14 @@ local z85Decoder = { 0x00, 0x44, 0x00, 0x54, 0x53, 0x52, 0x48, 0x00,
 
 function basexx.from_z85( str, ignore )
    str = ignore_set( str, ignore )
-   if #str % 5 ~= 0 then return nil end
+   if ( #str % 5 ) ~= 0 then return nil, #str % 5 end
 
    local result = {}
 
    local value = 0
    for i = 1, #str do
       local index = string.byte( str, i ) - 31
-      if index < 1 or index >= #z85Decoder then return nil end
+      if index < 1 or index >= #z85Decoder then return nil, index end
       value = ( value * 85 ) + z85Decoder[ index ]
       if ( i % 5 ) == 0 then
          local divisor = 256 * 256 * 256
@@ -243,7 +256,7 @@ local z85Encoder = "0123456789"..
                    ".-:+=^!/*?&<>()[]{}@%$#"
 
 function basexx.to_z85( str )
-   if ( #str % 4 ) ~= 0 then return nil end
+   if ( #str % 4 ) ~= 0 then return nil, #str, 4 end
 
    local result = {}
 

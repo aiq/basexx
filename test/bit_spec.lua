@@ -21,4 +21,10 @@ describe( "should handle bitfields strings", function()
       assert.is.same( "AC", basexx.from_bit( "o1ooooo1 o1oooo11", " " ) )
    end)
 
+   it( "should handle wrong characters without a crash", function()
+      local res, err = basexx.from_bit( "o1oo*ooo1*o1oo*oo11" )
+      assert.is.falsy( res )
+      assert.is.same( "*", err )
+   end)
+
 end)

@@ -19,5 +19,5 @@ describe( "should handle ZeroMQ base85 strings", function()
    it( "should allow to ignore characters in a base85 string", function()
       assert.is.same( "1234", basexx.from_z85( "'f!$Kw'\n", "'\n" ) )
    end)
-   
+
 end)

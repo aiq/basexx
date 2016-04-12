@@ -15,4 +15,10 @@ describe( "should handle base32(rfc3548) strings", function()
                       basexx.from_base32( "MNUHK3TLPEQGEYLDN5XCC===" ) )
    end)
 
+   it ( "should handle wrong characters without a crash", function()
+      local res, err = basexx.from_base32( "MS$DF" )
+      assert.is.falsy( res )
+      assert.is.same( "$", err )
+   end)
+
 end)

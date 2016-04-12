@@ -13,6 +13,8 @@ The *_from_* functions have two parameters:
 * *str* which represent the encoded string that should be decoded
 * *ignore* is an optional set of characters that should be ignored in the string, see the *_from_bit_* and *_from_hex_* examples
 
+The *_from_* functions return a string if the string can be decoded, otherwise *_nil_* and information which character caused the error.
+
 The *_to_* functions have just one parameter:
 
 * *str* the data string that should be encoded
