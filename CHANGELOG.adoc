@@ -1,5 +1,13 @@
 = changelog
 
+== from 0.2.0 to 0.3.0
+
+* fix: updated outdated README example for crockford
+* added the examples as tests for the crockford examples
+* improved from functions
+** added the possibility to ignore characters in the encoded string
+** handles now unknown characters in the encoded string without a crash
+
 == from 0.1.1 to 0.2.0
 
 * fix: supports now for unit tests busted 2.0
