@@ -110,7 +110,7 @@ local function from_basexx( str, alphabet, bits )
       local c = string.sub( str, i, i )
       if c ~= '=' then
          local index = string.find( alphabet, c, 1, true )
-         if not index or c == "$" then
+         if not index then
             return nil, c
          end
          table.insert( result, number_to_bit( index - 1, bits ) )
