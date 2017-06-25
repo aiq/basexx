@@ -48,6 +48,11 @@ local function pure_from_bit( str )
             end ) )
 end
 
+local function unexpected_char_error( str, pos )
+   local c = string.sub( str, pos, pos )
+   return string.format( "unexpected character at position %d: '%s'", pos, c )
+end
+
 --------------------------------------------------------------------------------
 
 local basexx = {}
@@ -62,8 +67,8 @@ function basexx.from_bit( str, ignore )
    str = ignore_set( str, ignore )
    str = string.lower( str )
    str = str:gsub( '[ilo]', function( c ) return bitMap[ c ] end )
-   local wrong = str:match( "[^01]" )
-   if wrong then return nil, wrong end
+   local pos = string.find( str, "[^01]" )
+   if pos then return nil, unexpected_char_error( str, pos ) end
 
    return pure_from_bit( str )
 end
@@ -86,8 +91,8 @@ end
 
 function basexx.from_hex( str, ignore )
    str = ignore_set( str, ignore )
-   local wrong = str:match( "[^%x]" )
-   if wrong then return nil, wrong end
+   local pos = string.find( str, "[^%x]" )
+   if pos then return nil, unexpected_char_error( str, pos ) end
 
    return ( str:gsub( '..', function ( cc )
                return string.char( tonumber( cc, 16 ) )
@@ -111,7 +116,7 @@ local function from_basexx( str, alphabet, bits )
       if c ~= '=' then
          local index = string.find( alphabet, c, 1, true )
          if not index then
-            return nil, c
+            return nil, unexpected_char_error( str, i )
          end
          table.insert( result, number_to_bit( index - 1, bits ) )
       end
@@ -212,6 +217,10 @@ end
 --
 --------------------------------------------------------------------------------
 
+local function length_error( len, d )
+   return string.format( "invalid length: %d - must be a multiple of %d", len, d )
+end
+
 local z85Decoder = { 0x00, 0x44, 0x00, 0x54, 0x53, 0x52, 0x48, 0x00,
                      0x4B, 0x4C, 0x46, 0x41, 0x00, 0x3F, 0x3E, 0x45, 
                      0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 
@@ -227,14 +236,18 @@ local z85Decoder = { 0x00, 0x44, 0x00, 0x54, 0x53, 0x52, 0x48, 0x00,
 
 function basexx.from_z85( str, ignore )
    str = ignore_set( str, ignore )
-   if ( #str % 5 ) ~= 0 then return nil, #str % 5 end
+   if ( #str % 5 ) ~= 0 then
+      return nil, length_error( #str, 5 )
+   end
 
    local result = {}
 
    local value = 0
    for i = 1, #str do
       local index = string.byte( str, i ) - 31
-      if index < 1 or index >= #z85Decoder then return nil, index end
+      if index < 1 or index >= #z85Decoder then
+         return nil, unexpected_char_error( str, i )
+      end
       value = ( value * 85 ) + z85Decoder[ index ]
       if ( i % 5 ) == 0 then
          local divisor = 256 * 256 * 256
@@ -256,7 +269,9 @@ local z85Encoder = "0123456789"..
                    ".-:+=^!/*?&<>()[]{}@%$#"
 
 function basexx.to_z85( str )
-   if ( #str % 4 ) ~= 0 then return nil, #str, 4 end
+   if ( #str % 4 ) ~= 0 then
+      return nil, length_error( #str, 4 )
+   end
 
    local result = {}
 

@@ -22,7 +22,7 @@ describe( "should handle hex strings", function()
    it( "should handle wrong characters without a crash", function()
       local res, err = basexx.from_hex( "4865-6c6c" )
       assert.is.falsy( res )
-      assert.is.same( "-", err )
+      assert.is.same( "unexpected character at position 5: '-'", err )
    end)
 
 end)

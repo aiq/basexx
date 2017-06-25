@@ -24,7 +24,7 @@ describe( "should handle bitfields strings", function()
    it( "should handle wrong characters without a crash", function()
       local res, err = basexx.from_bit( "o1oo*ooo1*o1oo*oo11" )
       assert.is.falsy( res )
-      assert.is.same( "*", err )
+      assert.is.same( "unexpected character at position 5: '*'", err )
    end)
 
 end)

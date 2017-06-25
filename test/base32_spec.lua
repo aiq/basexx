@@ -18,7 +18,7 @@ describe( "should handle base32(rfc3548) strings", function()
    it ( "should handle wrong characters without a crash", function()
       local res, err = basexx.from_base32( "MS$DF" )
       assert.is.falsy( res )
-      assert.is.same( "$", err )
+      assert.is.same( "unexpected character at position 3: '$'", err )
    end)
 
 end)

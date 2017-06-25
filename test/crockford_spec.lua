@@ -19,10 +19,10 @@ describe( "should handle base32(crockford) strings", function()
       assert.is.same( "foo", basexx.from_crockford( "CSQPY\n", "\n" ) )
    end)
 
-   it( "should allow to ignore characters without a crash", function()
+   it( "should handle wrong characters without a crash", function()
       local res, err = basexx.from_crockford( "CSQ%PY" )
       assert.is.falsy( res )
-      assert.is.same( "%", err )
+      assert.is.same( "unexpected character at position 4: '%'", err )
    end)
 
 end)
