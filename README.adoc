@@ -100,7 +100,7 @@ basexx.from_z85( "f!$Kw" ) --> 1234
 
 == Installation
 
-To install the version 0.3.0 of basexx use LuaRocks with the following line.
+To install the version 0.4.0 of basexx use LuaRocks with the following line.
 
 ----
 luarocks install basexx

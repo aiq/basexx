@@ -1,5 +1,12 @@
 = changelog
 
+== from 0.3.0 to 0.4.0
+
+* removed unnecessary check
+* changed error handling
+** the returned error value is now a message
+** can potentially break existing code - please check your code!
+
 == from 0.2.0 to 0.3.0
 
 * fix: updated outdated README example for crockford
