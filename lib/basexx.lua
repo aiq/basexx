@@ -2,8 +2,7 @@
 -- util functions
 --------------------------------------------------------------------------------
 
-local function divide_string( str, max, fillChar )
-   fillChar = fillChar or ""
+local function divide_string( str, max )
    local result = {}
 
    local start = 1
