@@ -9,7 +9,8 @@ description = {
 }
 
 source = {
-   url = "..."
+   url = "https://github.com/aiq/basexx/archive/master.tar.gz",
+   dir = "basexx-master",
 }
 
 dependencies = {
